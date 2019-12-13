@@ -21,6 +21,10 @@
 	var Img;
 	//しゃべるキャラクタ画像参照変数
 	var ImgTalk;
+	//しゃべるえがおキャラクタ画像参照変数
+	var ImgTalkS;
+	//しゃべる引きキャラクタ画像参照変数
+	var ImgTalkD;
 	//コメントフィールド参照変数
 	var CommentField;
 	//コメント表示スクロール位置保持変数
@@ -37,6 +41,8 @@
 
 	//ページロード時の処理
 	window.onload = function(){
+
+
 
 	//---------待ち受け画像エリア------
 
@@ -71,7 +77,7 @@
 		ImgNormal.style="position:absolute;"
 		ImgNormal.width = 230;
 		ImgNormal.style.top = 40;
-		ImgNormal.style.left = 60;
+		ImgNormal.style.left = 25;
 
 	//---------キャラクタ画像エリア------
 
@@ -83,9 +89,32 @@
 		ImgTalk.style="position:absolute;"
 		ImgTalk.width = 230;
 		ImgTalk.style.top = 40;
-		ImgTalk.style.left = 60;
+		ImgTalk.style.left = 25;
 
 	//---------しゃべるキャラクタ画像エリア------
+
+	//---------えがおキャラクタ画像エリア------
+
+		//画像の表示位置等のパラメータ
+		ImgTalkS = document.createElement('img');
+		ImgTalkS.src = "https://1.bp.blogspot.com/-9jeVuxmJ7vs/XfMzKU0dzdI/AAAAAAAAACc/Z3gWAmCgW28ZQqPC379vUFnpYcb8fL_agCNcBGAsYHQ/s1600/boy_smile.gif";
+		ImgTalkS.style="position:absolute;"
+		ImgTalkS.width = 230;
+		ImgTalkS.style.top = 40;
+		ImgTalkS.style.left = 25;
+
+	//---------えがおキャラクタ画像エリア------
+
+	//---------ドン引きキャラクタ画像エリア------
+
+			//画像の表示位置等のパラメータ
+		ImgTalkD = document.createElement('img');
+		ImgTalkD.src = "https://1.bp.blogspot.com/-kttx17JxZ9g/XfMzL-Lm2tI/AAAAAAAAACg/iuOXwPtmjAk0lNyEjVoY0hy77AGs7fptQCNcBGAsYHQ/s1600/boy_desmile.gif";
+		ImgTalkD.style="position:absolute;"
+		ImgTalkD.width = 230;
+		ImgTalkD.style.top = 40;
+		ImgTalkD.style.left = 25;
+	//---------ドン引きキャラクタ画像エリア------
 
 
 
@@ -128,6 +157,7 @@
 		QuestionField.style.left = 0;
 		QuestionField.style.width = 450;
 		QuestionField.style.height = 45;
+
 
 	//---------質問テキストボックス----
 
@@ -205,10 +235,23 @@
 			Text.style.left = 10;
 			//しゃべる画像に変更する
 			PopUpField.Div.removeChild(ImgNormal) 
-			PopUpField.Div.appendChild(ImgTalk);
+			var random = Math.floor( Math.random() * 5 );
+			if(random == 0){
+				PopUpField.Div.appendChild(ImgTalkS);	
+			}else if(random == 1){
+				PopUpField.Div.appendChild(ImgTalkD);	
+			}else{
+				PopUpField.Div.appendChild(ImgTalk);			
+			}
 			//数秒後に画像をもとに戻す
 			setTimeout(function(){
-				PopUpField.Div.removeChild(ImgTalk);
+				if(random == 0){
+					PopUpField.Div.removeChild(ImgTalkS);	
+				}else if(random == 1){
+					PopUpField.Div.removeChild(ImgTalkD);	
+				}else{
+					PopUpField.Div.removeChild(ImgTalk);			
+				}
 				PopUpField.Div.appendChild(ImgNormal);
 			},2000);
 		}
@@ -362,7 +405,6 @@
 
 
 
-
 	//質問の送信
 	function SousinComent(){
 
@@ -394,13 +436,8 @@
 　                 });
 
             }
-
-			
-	
-
 		//質問エリアにフォーカスをセット
 		QuestionField.focus();
 
 	}
-
 </script>
